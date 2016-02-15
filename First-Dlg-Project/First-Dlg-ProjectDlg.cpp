@@ -54,8 +54,8 @@ CFirstDlgProjectDlg::CFirstDlgProjectDlg(CWnd* pParent /*=NULL*/)
 	, m_Hours(1)
 	, m_Minutes(2)
 	, m_Seconds(3)
-	, m_Trend_TOSECOND(FALSE)
-	, m_Trend_INVERSION(FALSE)
+	, m_Trend_TOSECOND(TRUE)
+	, m_Trend_INVERSION(TRUE)
 	, m_Count_Seconds(0)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
@@ -119,11 +119,7 @@ BOOL CFirstDlgProjectDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Мелкий значок
 
 	// TODO: добавьте дополнительную инициализацию
-	m_Trend_TOSECOND = FALSE;
-	m_Trend_INVERSION = TRUE;
-	UpdateData(FALSE);
-	GetDlgItem(IDC_RESULT)->EnableWindow(FALSE);
-	OnBnClickedRadioInvers();
+	OnBnClickedRadioTosecond();
 
 	return TRUE;  // возврат значения TRUE, если фокус не передан элементу управления
 }
