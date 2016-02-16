@@ -52,7 +52,7 @@ BEGIN
     "\r\n"
     "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)\r\n"
     "LANGUAGE 25, 1\r\n"
-    "#include ""res\\Themenuandtoolbar.rc2""  // ресурсы, не редактируемые в Microsoft Visual C++\r\n"
+    "#include ""res\\Themenuandtoolbartwo.rc2""  // ресурсы, не редактируемые в Microsoft Visual C++\r\n"
     "#include ""l.RUS\\afxres.rc""      // Стандартные компоненты\r\n"
     "#include ""l.RUS\\afxprint.rc""    // ресурсы для печати/предварительного просмотра\r\n"
     "#endif\r\n"
@@ -69,9 +69,9 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON                    "res\\The-menu-and-toolbar.ico"
+IDR_MAINFRAME           ICON                    "res\\The-menu-and-toolbar-two.ico"
 
-IDR_ThemenuandtoolbTYPE ICON                    "res\\The-menu-and-toolbarDoc.ico"
+IDR_ThemenuandtoolbTYPE ICON                    "res\\The-menu-and-toolbar-twoDoc.ico"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -153,15 +153,15 @@ END
 // Dialog
 //
 
-IDD_ABOUTBOX DIALOGEX 0, 0, 195, 46
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "О проекте The-menu-and-toolbar"
+IDD_ABOUTBOX DIALOGEX 0, 0, 185, 46
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION
+CAPTION "О проекте The-menu-and-toolbar-two"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,14,14,21,20
-    LTEXT           "The-menu-and-toolbar, версия 1.0",IDC_STATIC,42,14,114,8,SS_NOPREFIX
+    LTEXT           "The-menu-and-toolbar-two, версия 1.0",IDC_STATIC,42,14,114,8,SS_NOPREFIX
     LTEXT           "Туров Виталий (C) 2016",IDC_STATIC,42,26,114,8
-    DEFPUSHBUTTON   "ОК",IDOK,138,25,50,14,WS_GROUP
+    DEFPUSHBUTTON   "ОК",IDOK,128,25,50,14,WS_GROUP
 END
 
 
@@ -188,12 +188,12 @@ BEGIN
         BLOCK "041904b0"
         BEGIN
             VALUE "CompanyName", "ННГУ им. Н. И. Лобачевского"
-            VALUE "FileDescription", "The-menu-and-toolbar"
+            VALUE "FileDescription", "The-menu-and-toolbar-two"
             VALUE "FileVersion", "1.0.0.1"
-            VALUE "InternalName", "The-menu-and-toolbar.exe"
+            VALUE "InternalName", "The-menu-and-toolbar-two.exe"
             VALUE "LegalCopyright", "Туров Виталий.  Все права защищены."
-            VALUE "OriginalFilename", "The-menu-and-toolbar.exe"
-            VALUE "ProductName", "Обработка командных сообщений. Меню и панель инструментов."
+            VALUE "OriginalFilename", "The-menu-and-toolbar-two.exe"
+            VALUE "ProductName", "Обработка оконных сообщений. Панель состояния."
             VALUE "ProductVersion", "1.0.0.1"
         END
     END
@@ -215,7 +215,7 @@ BEGIN
     IDD_ABOUTBOX, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 188
+        RIGHTMARGIN, 178
         TOPMARGIN, 7
         BOTTOMMARGIN, 39
     END
@@ -246,12 +246,12 @@ END
 
 STRINGTABLE
 BEGIN
-    IDR_MAINFRAME           "The-menu-and-toolbar\n\nThe-menu-and-to\nThe-menu-and-toolbar Files (*.document)\n.document\nThemenuandtoolbar.Document\nThe-menu-and-toolbar.Document"
+    IDR_MAINFRAME           "The-menu-and-toolbar-two\n\nThe-menu-and-to\nThe-menu-and-toolbar-two Files (*.document)\n.document\nThemenuandtoolbartwo.Document\nThe-menu-and-toolbar-two.Document"
 END
 
 STRINGTABLE
 BEGIN
-    AFX_IDS_APP_TITLE       "The-menu-and-toolbar"
+    AFX_IDS_APP_TITLE       "The-menu-and-toolbar-two"
     AFX_IDS_IDLEMESSAGE     "Готово"
 END
 
@@ -375,7 +375,7 @@ END
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
 LANGUAGE 25, 1
-#include "res\Themenuandtoolbar.rc2"  // ресурсы, не редактируемые в Microsoft Visual C++
+#include "res\Themenuandtoolbartwo.rc2"  // ресурсы, не редактируемые в Microsoft Visual C++
 #include "l.RUS\afxres.rc"      // Стандартные компоненты
 #include "l.RUS\afxprint.rc"    // ресурсы для печати/предварительного просмотра
 #endif
