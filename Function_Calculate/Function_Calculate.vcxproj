@@ -133,7 +133,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -189,13 +189,20 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CalculateFunction.h" />
+    <ClInclude Include="FunctionWithOneArgument.h" />
+    <ClInclude Include="FunctionWithTwoArguments.h" />
     <ClInclude Include="Function_Calculate.h" />
     <ClInclude Include="Function_CalculateDlg.h" />
+    <ClInclude Include="LibraryFunctions.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CalculateFunction.cpp" />
+    <ClCompile Include="FunctionWithOneArgument.cpp" />
+    <ClCompile Include="FunctionWithTwoArguments.cpp" />
     <ClCompile Include="Function_Calculate.cpp" />
     <ClCompile Include="Function_CalculateDlg.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -213,8 +220,14 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\Function_Calculate.ico" />
+    <Image Include="res\main.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="Function_Calculate.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

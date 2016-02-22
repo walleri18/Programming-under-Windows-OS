@@ -3,8 +3,6 @@
 //
 
 #pragma once
-
-
 // диалоговое окно CFunction_CalculateDlg
 class CFunction_CalculateDlg : public CDialogEx
 {
@@ -31,4 +29,35 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
+public:
+	// Выбор для Combo List
+	BOOL m_ComboList;
+	// Выбор для Edit control
+	BOOL m_EditControl;
+	// Щелчёк по пункту RadioComboList
+	afx_msg void OnBnClickedRadioComboList();
+	// Щелчёк по пункту RadioEditControl
+	afx_msg void OnBnClickedEditControl();
+	// Имя функции
+	CString m_NameFunctionEditControl;
+	// Выбранная функция с помощью ComboList
+	CString m_ComboListSelection;
+	// Имя функции для вывода
+	CString m_Name_Function;
+	// Переменная для первого аргумента
+	double m_ONE_ARGUMENT;
+	// Переменная для второго аргумента
+	double m_TWO_ARGUMENT;
+	// Щелчёк по кнопке "Выбрать функцию"
+	afx_msg void OnBnClickedBtnSelectFunction();
+	// Номер функции
+	int m_Number_Function_Selected;
+	// С одним аргументом или с двумя
+	BOOL One_Argument;
+	// Щелчёк по кнопке "Вычислить"
+	afx_msg void OnBnClickedBtnResult();
+	// Содержимое результата
+	CString m_Result_Show;
+	afx_msg void OnBnClickedBtnSaveFile();
+	afx_msg void OnBnClickedBtnReset();
 };

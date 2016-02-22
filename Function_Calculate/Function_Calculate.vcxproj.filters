@@ -33,6 +33,18 @@
     <ClInclude Include="Resource.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
+    <ClInclude Include="CalculateFunction.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionWithOneArgument.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionWithTwoArguments.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="LibraryFunctions.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Function_Calculate.cpp">
@@ -42,6 +54,15 @@
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
+    <ClCompile Include="CalculateFunction.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionWithOneArgument.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionWithTwoArguments.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
   </ItemGroup>
@@ -57,6 +78,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\Function_Calculate.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="res\main.ico">
       <Filter>Файлы ресурсов</Filter>
     </Image>
   </ItemGroup>
