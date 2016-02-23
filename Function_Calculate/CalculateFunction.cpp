@@ -6,13 +6,13 @@ CalculateFunction::CalculateFunction()
 }
 
 // конструктор с двум¤ параметрами
-CalculateFunction::CalculateFunction(function1 releaseFunction, string nameFunction) : nameFunction(nameFunction)
+CalculateFunction::CalculateFunction(function1 releaseFunction)
 {
 	this->releaseFunction1 = releaseFunction;
 }
 
 // конструктор с двумя параметрами
-CalculateFunction::CalculateFunction(function2 releaseFunction, string nameFunction) : nameFunction(nameFunction)
+CalculateFunction::CalculateFunction(function2 releaseFunction)
 {
 	this->releaseFunction2 = releaseFunction;
 }

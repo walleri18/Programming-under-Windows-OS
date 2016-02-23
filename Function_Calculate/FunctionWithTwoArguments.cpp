@@ -1,16 +1,8 @@
-﻿#include "FunctionWithTwoArguments.h"
-
-// конструктор по умолчанию
-FunctionWithTwoArguments::FunctionWithTwoArguments()
-{
-}
+﻿#pragma once
+#include "FunctionWithTwoArguments.h"
 
 // конструктор с двумя параметрами
-FunctionWithTwoArguments::FunctionWithTwoArguments(function2 releaseFunction, string nameFunction) : CalculateFunction(releaseFunction, nameFunction)
-{
-}
-
-FunctionWithTwoArguments::~FunctionWithTwoArguments()
+FunctionWithTwoArguments::FunctionWithTwoArguments(function2 releaseFunction) : CalculateFunction(releaseFunction)
 {
 }
 

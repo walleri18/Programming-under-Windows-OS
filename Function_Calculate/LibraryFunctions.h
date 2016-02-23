@@ -8,29 +8,28 @@ enum {
 
 struct Function
 {
-	string name;// имя функции
 	CalculateFunction::function1 releaseFunction1;// указатель на функцию первого типа с одним аргументом
 	CalculateFunction::function2 releaseFunction2;// указатель на функцию второго типа с двумя аргументами
 	
-} function[20] = 
+} function[] = 
 {
-	{ "acos", acos, NULL },
-	{ "asin", asin, NULL },
-	{ "atan", atan, NULL },
-	{ "atan2", NULL, atan2 },
-	{ "ceil", ceil, NULL },
-	{ "cos", cos, NULL },
-	{ "cosh", cosh, NULL },
-	{ "exp", exp, NULL },
-	{ "fabs", fabs, NULL },
-	{ "floor", floor, NULL },
-	{ "fmod", NULL, fmod },
-	{ "log", log, NULL },
-	{ "log10", log10, NULL },
-	{ "pow", NULL, pow },
-	{ "sin", sin, NULL },
-	{ "sinh", sinh, NULL },
-	{ "sqrt", sqrt, NULL },
-	{ "tan", tan, NULL },
-	{ "tanh", tanh, NULL },
+	{ acos, NULL },
+	{ asin, NULL },
+	{ atan, NULL },
+	{ NULL, atan2 },
+	{ ceil, NULL },
+	{ cos, NULL },
+	{ cosh, NULL },
+	{ exp, NULL },
+	{ fabs, NULL },
+	{ floor, NULL },
+	{ NULL, fmod },
+	{ log, NULL },
+	{ log10, NULL },
+	{ NULL, pow },
+	{ sin, NULL },
+	{ sinh, NULL },
+	{ sqrt, NULL },
+	{ tan, NULL },
+	{ tanh, NULL },
 };

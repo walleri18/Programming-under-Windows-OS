@@ -216,6 +216,7 @@
     <ResourceCompile Include="Function_Calculate.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="res\Function_Calculate.rc2" />
   </ItemGroup>
   <ItemGroup>

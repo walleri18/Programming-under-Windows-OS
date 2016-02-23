@@ -7,10 +7,7 @@ class FunctionWithTwoArguments :
 {
 // Функции(методы)
 public:
-	FunctionWithTwoArguments();// конструктор по умолчанию
-	FunctionWithTwoArguments(function2, string);// конструктор с двумя параметрами
-	~FunctionWithTwoArguments();// деструктор по умолчанию
-	void setArgument(double, double);// сеттер аргументов
+	FunctionWithTwoArguments(function2);
 	double calculation();// вычисление функции
 };
 

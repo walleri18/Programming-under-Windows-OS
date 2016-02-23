@@ -339,61 +339,61 @@ void CFunction_CalculateDlg::OnBnClickedBtnResult()
 	switch (functionSelection)
 	{
 	case ACOS:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1, function[functionSelection].name);
+		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
 		break;
 	case ASIN:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1, function[functionSelection].name);
+		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
 		break;
 	case ATAN:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1, function[functionSelection].name);
+		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
 		break;
 	case ATAN2:
-		fun = new FunctionWithTwoArguments(function[functionSelection].releaseFunction2, function[functionSelection].name);
+		fun = new FunctionWithTwoArguments(function[functionSelection].releaseFunction2);
 		break;
 	case CEIL:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1, function[functionSelection].name);
+		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
 		break;
 	case COS:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1, function[functionSelection].name);
+		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
 		break;
 	case COSH:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1, function[functionSelection].name);
+		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
 		break;
 	case EXP:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1, function[functionSelection].name);
+		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
 		break;
 	case FABS:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1, function[functionSelection].name);
+		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
 		break;
 	case FLOOR:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1, function[functionSelection].name);
+		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
 		break;
 	case FMOD:
-		fun = new FunctionWithTwoArguments(function[functionSelection].releaseFunction2, function[functionSelection].name);
+		fun = new FunctionWithTwoArguments(function[functionSelection].releaseFunction2);
 		break;
 	case LOG:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1, function[functionSelection].name);
+		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
 		break;
 	case LOG10:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1, function[functionSelection].name);
+		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
 		break;
 	case POW:
-		fun = new FunctionWithTwoArguments(function[functionSelection].releaseFunction2, function[functionSelection].name);
+		fun = new FunctionWithTwoArguments(function[functionSelection].releaseFunction2);
 		break;
 	case SIN:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1, function[functionSelection].name);
+		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
 		break;
 	case SINH:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1, function[functionSelection].name);
+		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
 		break;
 	case SQRT:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1, function[functionSelection].name);
+		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
 		break;
 	case TAN:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1, function[functionSelection].name);
+		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
 		break;
 	case TANH:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1, function[functionSelection].name);
+		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
 		break;
 	}
 
@@ -422,7 +422,7 @@ void CFunction_CalculateDlg::OnBnClickedBtnSaveFile()
 {
 	CFile file;
 
-	if (!file.Open("Result.txt", CFile::modeCreate | CFile::modeWrite)) {
+	if (!file.Open(L"Result.txt", CFile::modeCreate | CFile::modeWrite)) {
 		MessageBox(L"Ошибка открытия файла Result.txt", L"Ошибка открытия файлы", MB_OK | MB_ICONERROR);
 		OnOK();
 	}

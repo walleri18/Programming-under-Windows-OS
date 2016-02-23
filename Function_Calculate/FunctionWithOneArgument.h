@@ -7,8 +7,6 @@ class FunctionWithOneArgument :
 {
 // Функции(методы)
 public:
-	FunctionWithOneArgument();// конструктор по умолчанию
-	FunctionWithOneArgument(function1, string);// конструктор с двумя параметрами
-	~FunctionWithOneArgument();// деструктор по умолчанию
+	FunctionWithOneArgument(function1);
 };
 
