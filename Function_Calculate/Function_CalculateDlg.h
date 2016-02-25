@@ -30,6 +30,9 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 public:
+	enum Number_Function {
+		ACOS, ASIN, ATAN, ATAN2, CEIL, COS, COSH, EXP, FABS, FLOOR, FMOD, LOG, LOG10, POW, SIN, SINH, SQRT, TAN, TANH, ERRORs
+	};
 	// Выбор для Combo List
 	BOOL m_ComboList;
 	// Выбор для Edit control
@@ -51,7 +54,7 @@ public:
 	// Щелчёк по кнопке "Выбрать функцию"
 	afx_msg void OnBnClickedBtnSelectFunction();
 	// Номер функции
-	int m_Number_Function_Selected;
+	Number_Function m_Number_Function_Selected;
 	// С одним аргументом или с двумя
 	BOOL One_Argument;
 	// Щелчёк по кнопке "Вычислить"

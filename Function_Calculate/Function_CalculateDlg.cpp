@@ -6,7 +6,6 @@
 #include "Function_Calculate.h"
 #include "Function_CalculateDlg.h"
 #include "afxdialogex.h"
-#include "LibraryFunctions.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -58,7 +57,7 @@ CFunction_CalculateDlg::CFunction_CalculateDlg(CWnd* pParent /*=NULL*/)
 	, m_ComboListSelection(_T(""))
 	, m_ONE_ARGUMENT(0)
 	, m_TWO_ARGUMENT(0)
-	, m_Number_Function_Selected(-1)
+	, m_Number_Function_Selected(ERRORs)
 	, One_Argument(FALSE)
 	, m_Result_Show(_T("Результаты:"))
 	, m_Name_Function(_T(""))
@@ -226,71 +225,69 @@ void CFunction_CalculateDlg::OnBnClickedBtnSelectFunction()
 	}
 
 	if (nameFunction == L"ACOS")
-		m_Number_Function_Selected = 0;
+		m_Number_Function_Selected = ACOS;
 
 	else if (nameFunction == L"ASIN")
-		m_Number_Function_Selected = 1;
+		m_Number_Function_Selected = ASIN;
 
 	else if (nameFunction == L"ATAN")
-		m_Number_Function_Selected = 2;
+		m_Number_Function_Selected = ATAN;
 
 	else if (nameFunction == L"ATAN2")
-		m_Number_Function_Selected = 3;
+		m_Number_Function_Selected = ATAN2;
 
 	else if (nameFunction == L"CEIL")
-		m_Number_Function_Selected = 4;
+		m_Number_Function_Selected = CEIL;
 
 	else if (nameFunction == L"COS")
-		m_Number_Function_Selected = 5;
+		m_Number_Function_Selected = COS;
 
 	else if (nameFunction == L"COSH")
-		m_Number_Function_Selected = 6;
+		m_Number_Function_Selected = COSH;
 
 	else if (nameFunction == L"EXP")
-		m_Number_Function_Selected = 7;
+		m_Number_Function_Selected = EXP;
 
 	else if (nameFunction == L"FABS")
-		m_Number_Function_Selected = 8;
+		m_Number_Function_Selected = FABS;
 
 	else if (nameFunction == L"FLOOR")
-		m_Number_Function_Selected = 9;
+		m_Number_Function_Selected = FLOOR;
 
 	else if (nameFunction == L"FMOD")
-		m_Number_Function_Selected = 10;
+		m_Number_Function_Selected = FMOD;
 
 	else if (nameFunction == L"LOG")
-		m_Number_Function_Selected = 11;
+		m_Number_Function_Selected = LOG;
 
 	else if (nameFunction == L"LOG10")
-		m_Number_Function_Selected = 12;
+		m_Number_Function_Selected = LOG10;
 
 	else if (nameFunction == L"POW")
-		m_Number_Function_Selected = 13;
+		m_Number_Function_Selected = POW;
 
 	else if (nameFunction == L"SIN")
-		m_Number_Function_Selected = 14;
+		m_Number_Function_Selected = SIN;
 
 	else if (nameFunction == L"SINH")
-		m_Number_Function_Selected = 15;
+		m_Number_Function_Selected = SINH;
 
 	else if (nameFunction == L"SQRT")
-		m_Number_Function_Selected = 16;
+		m_Number_Function_Selected = SQRT;
 
 	else if (nameFunction == L"TAN")
-		m_Number_Function_Selected = 17;
+		m_Number_Function_Selected = TAN;
 
 	else if (nameFunction == L"TANH")
-		m_Number_Function_Selected = 18;
+		m_Number_Function_Selected = TANH;
 
 	else
-		m_Number_Function_Selected = -1;
+		m_Number_Function_Selected = ERRORs;
 
-	BOOL error = ((m_Number_Function_Selected <= -1) || (m_Number_Function_Selected >= 19)) ? TRUE : FALSE;
-
-	if (error == TRUE)
+	if (m_Number_Function_Selected == ERRORs)
 		MessageBox(L"Ошибка!!!\nФункция введена неверно!!!", L"Ошибка ввода функции", MB_OK | MB_ICONERROR);
 	else {
-		if ((m_Number_Function_Selected == 3) || (m_Number_Function_Selected == 10) || (m_Number_Function_Selected == 13))
+		if ((m_Number_Function_Selected == ATAN2) || (m_Number_Function_Selected == FMOD) || (m_Number_Function_Selected == POW))
 			One_Argument = FALSE;
 
 		else
@@ -331,90 +328,134 @@ void CFunction_CalculateDlg::OnBnClickedBtnSelectFunction()
 
 void CFunction_CalculateDlg::OnBnClickedBtnResult()
 {
-	// Переменная выбора функции
-	int functionSelection = m_Number_Function_Selected;
+	UpdateData(TRUE);
 
-	CalculateFunction *fun(NULL);
+	switch (m_Number_Function_Selected)
+	{
+	case ACOS:
+	case ASIN:
+	case ATAN:
+	case ATAN2:
+	case COS:
+	case COSH:
+	case SIN:
+	case SINH:
+	case TAN:
+	case TANH:
+		m_ONE_ARGUMENT = (m_ONE_ARGUMENT * 3.14) / 180;
+		m_TWO_ARGUMENT = (m_TWO_ARGUMENT * 3.14) / 180;
+	}
+
+	// Переменная выбора функции
+	Number_Function functionSelection = m_Number_Function_Selected;
+
+	double result(0);
 
 	switch (functionSelection)
 	{
 	case ACOS:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
+		result = acos(m_ONE_ARGUMENT);
 		break;
 	case ASIN:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
+		result = asin(m_ONE_ARGUMENT);
 		break;
 	case ATAN:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
+		result = atan(m_ONE_ARGUMENT);
 		break;
 	case ATAN2:
-		fun = new FunctionWithTwoArguments(function[functionSelection].releaseFunction2);
+		result = atan2(m_ONE_ARGUMENT, m_TWO_ARGUMENT);
 		break;
 	case CEIL:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
+		result = ceil(m_ONE_ARGUMENT);
 		break;
 	case COS:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
+		result = cos(m_ONE_ARGUMENT);
 		break;
 	case COSH:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
+		result = cosh(m_ONE_ARGUMENT);
 		break;
 	case EXP:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
+		result = exp(m_ONE_ARGUMENT);
 		break;
 	case FABS:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
+		result = fabs(m_ONE_ARGUMENT);
 		break;
 	case FLOOR:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
+		result = floor(m_ONE_ARGUMENT);
 		break;
 	case FMOD:
-		fun = new FunctionWithTwoArguments(function[functionSelection].releaseFunction2);
+		result = fmod(m_ONE_ARGUMENT, m_TWO_ARGUMENT);
 		break;
 	case LOG:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
+		result = log(m_ONE_ARGUMENT);
 		break;
 	case LOG10:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
+		result = log10(m_ONE_ARGUMENT);
 		break;
 	case POW:
-		fun = new FunctionWithTwoArguments(function[functionSelection].releaseFunction2);
+		result = pow(m_ONE_ARGUMENT, m_TWO_ARGUMENT);
 		break;
 	case SIN:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
+		result = sin(m_ONE_ARGUMENT);
 		break;
 	case SINH:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
+		result = sinh(m_ONE_ARGUMENT);
 		break;
 	case SQRT:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
+		result = sqrt(m_ONE_ARGUMENT);
 		break;
 	case TAN:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
+		result = tan(m_ONE_ARGUMENT);
 		break;
 	case TANH:
-		fun = new FunctionWithOneArgument(function[functionSelection].releaseFunction1);
+		result = tanh(m_ONE_ARGUMENT);
 		break;
 	}
 
-	// Установка аргументов
-	fun->setArgument(m_ONE_ARGUMENT, m_TWO_ARGUMENT);
+	switch (m_Number_Function_Selected)
+	{
+	case ACOS:
+	case ASIN:
+	case ATAN:
+	case ATAN2:
+	case COS:
+	case COSH:
+	case SIN:
+	case SINH:
+	case TAN:
+	case TANH:
+		result = (result * 180) / 3.14;
+	}
 
 	if (One_Argument == TRUE) {
 
-		m_Result_Show.Format(L"Результаты:\n%s(%g) = %g", m_Name_Function, m_ONE_ARGUMENT, fun->calculation());
+		m_Result_Show.Format(L"Результаты:\n%s(%g) = %g", m_Name_Function, m_ONE_ARGUMENT, result);
 
 	}
 
 	else if (One_Argument == FALSE) {
 
-		m_Result_Show.Format(L"Результаты:\n%s(%g, %g) = %g", m_Name_Function, m_ONE_ARGUMENT, m_TWO_ARGUMENT, fun->calculation());
+		m_Result_Show.Format(L"Результаты:\n%s(%g, %g) = %g", m_Name_Function, m_ONE_ARGUMENT, m_TWO_ARGUMENT, result);
 
 	}
+	else {
+		m_Result_Show = L"Результаты:\nФункция не выбрана";
+	}
+	
+	// Окно показа результата
 	GetDlgItem(IDC_RESULT_BORD)->ShowWindow(SW_SHOW);
+
+	// Блокировка кнопки вычислить
+	GetDlgItem(IDC_BTN_RESULT)->EnableWindow(FALSE);
+
+	// Кнопки "Начать программу заново" и "Сохранить результаты в файл"
 	GetDlgItem(IDC_BTN_RESET)->ShowWindow(SW_SHOW);
 	GetDlgItem(IDC_BTN_SAVE_FILE)->ShowWindow(SW_SHOW);
-	GetDlgItem(IDC_BTN_RESULT)->EnableWindow(FALSE);
+
+	// Окно показа списка функций
+	GetDlgItem(IDC_STATIC_TEXT_LIST_FUNCTION)->ShowWindow(FALSE);
+
+	UpdateData(FALSE);
 }
 
 
@@ -431,32 +472,62 @@ void CFunction_CalculateDlg::OnBnClickedBtnSaveFile()
 
 	file.Close();
 
-
+	// Кнопка сохранения в файл
 	GetDlgItem(IDC_BTN_SAVE_FILE)->EnableWindow(FALSE);
 }
 
 
 void CFunction_CalculateDlg::OnBnClickedBtnReset()
 {
+	UpdateData(TRUE);
+
+	if (MessageBox(L"Вы уверены, что хотите начать программу заново?", L"Начать программу заново",
+		MB_YESNO | MB_ICONQUESTION) == IDNO)
+		return;
+
+	// Настройки по-умолчанию
 	m_ComboList = FALSE;
 	m_EditControl = TRUE;
 	m_NameFunctionEditControl = L"";
 	m_ComboListSelection = L"";
 	m_ONE_ARGUMENT = 0;
 	m_TWO_ARGUMENT = 0;
-	m_Number_Function_Selected = -1;
+	m_Number_Function_Selected = ERRORs;
 	One_Argument = FALSE;
 	m_Result_Show = L"Результаты:";
 	m_Name_Function = L"";
 
+	// Выбор по-умолчанию за комбо-лист
 	OnBnClickedRadioComboList();
 
+	// Кнопка выбора функции
 	GetDlgItem(IDC_BTN_SELECT_FUNCTION)->EnableWindow(TRUE);
 	GetDlgItem(IDC_BTN_SELECT_FUNCTION)->ShowWindow(SW_SHOW);
 
+	// Поля редактирования для аргументов
 	GetDlgItem(IDC_EDIT_ONE_ARGUMENT)->ShowWindow(FALSE);
 	GetDlgItem(IDC_EDIT_TWO_ARGUMENT)->ShowWindow(FALSE);
 
+	// Окна с текстом для полей редактирования
 	GetDlgItem(IDC_STATIC_TEXT_ONE_ARGUMENT)->ShowWindow(FALSE);
 	GetDlgItem(IDC_STATIC_TEXT_TWO_ARGUMENT)->ShowWindow(FALSE);
+
+	// Окно показа результата
+	GetDlgItem(IDC_RESULT_BORD)->ShowWindow(FALSE);
+
+	// Кнопки "Вычислить", "Сохранить результаты в файл", "Начать программу заново"
+	GetDlgItem(IDC_BTN_RESET)->ShowWindow(FALSE);
+	GetDlgItem(IDC_BTN_SAVE_FILE)->ShowWindow(FALSE);
+	GetDlgItem(IDC_BTN_RESULT)->ShowWindow(FALSE);
+
+	GetDlgItem(IDC_BTN_RESET)->EnableWindow(TRUE);
+	GetDlgItem(IDC_BTN_SAVE_FILE)->EnableWindow(TRUE);
+	GetDlgItem(IDC_BTN_RESULT)->EnableWindow(TRUE);
+
+	// Выбор стиля ввода функции
+	GetDlgItem(IDC_GROUP_VIBOR)->EnableWindow(TRUE);
+	GetDlgItem(IDC_RADIO_COMBO_LIST)->EnableWindow(TRUE);
+	GetDlgItem(IDC_EDIT_CONTROL)->EnableWindow(TRUE);
+
+	UpdateData(FALSE);
 }
