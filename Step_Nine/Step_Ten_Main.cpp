@@ -49,6 +49,7 @@ public:
 	int OnCreate(LPCREATESTRUCT lpCreateSctruct);
 	void MenuExit();
 	void MenuSwitch();
+	afx_msg void OnPaint();
 	~CMainWnd();
 private:
 	// Какое меню активировано (TRUE = IDR_MENU, FALSE = IDR_MENU_RUS)
@@ -92,6 +93,9 @@ BEGIN_MESSAGE_MAP(CMainWnd, CFrameWnd)
 
 	// Переключением между меню
 	ON_COMMAND(ID_FILE_SWITCH, MenuSwitch)
+
+	// Перерисовка экрана
+	ON_WM_PAINT()
 END_MESSAGE_MAP()
 
 int CMainWnd::OnCreate(LPCREATESTRUCT lpCreateScruct)
@@ -182,6 +186,30 @@ void CMainWnd::MenuExit()
 {
 	// Уничтожаем окно
 	DestroyWindow();
+}
+
+void CMainWnd::OnPaint()
+{
+	// Получение контекста устройства, то где рисовать
+	CPaintDC dc(this);
+
+	// Вывод текста с определённых координат
+	dc.TextOutW(200, 200, L"Hello MFC Programm");
+	
+	dc.TextOutW(200, 216, L"Автор: Туров Виталий");
+
+	// Откуда начинать рисовать линию
+	dc.MoveTo(600, 300);
+
+	// До куда вести линию от точки начала и от куда вести дальше
+	dc.LineTo(600, 55);
+
+	// Понятно
+	dc.LineTo(0, 55);
+
+	dc.LineTo(0, 300);
+
+	dc.LineTo(600, 300);
 }
 
 CMainWnd::~CMainWnd()
