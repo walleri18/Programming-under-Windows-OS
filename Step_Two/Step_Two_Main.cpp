@@ -25,7 +25,7 @@ private:
 CMainWnd::CMainWnd()
 {
 	// Создание окна программы
-	Create(NULL, L"Step_One", WS_OVERLAPPEDWINDOW, rectDefault,
+	Create(NULL, L"Step_Two", WS_OVERLAPPEDWINDOW, rectDefault,
 		NULL, NULL);
 
 	// Создаём объект надписи

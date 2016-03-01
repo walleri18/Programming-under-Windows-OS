@@ -90,7 +90,7 @@ void CMainWnd::OnLButtonDblClk(UINT, CPoint)
 CMainWnd::CMainWnd()
 {
 	// Создание окна программы
-	Create(NULL, L"Step_One", WS_OVERLAPPEDWINDOW, rectDefault,
+	Create(NULL, L"Step_Four", WS_OVERLAPPEDWINDOW, rectDefault,
 		NULL, NULL);
 
 	// Создаём объект надписи

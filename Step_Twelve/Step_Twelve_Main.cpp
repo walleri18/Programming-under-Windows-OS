@@ -8,6 +8,29 @@
 // Индификатор для поля редактирования
 #define IDC_MYEDIT 102
 
+// Свой класс кисти
+class CMyPaintDC : public CPaintDC
+{
+public:
+	// Конструктор для инициализации
+	CMyPaintDC(CWnd* pWnd);
+
+	// Функция рисования нашей фигуры
+	void DrawCross(int iPosX, int iPosY);
+};
+
+CMyPaintDC::CMyPaintDC(CWnd* pWnd) : CPaintDC(pWnd) {}
+
+void CMyPaintDC::DrawCross(int iPosX, int iPosY)
+{
+	MoveTo(iPosX - 50, iPosY);
+	LineTo(iPosX + 50, iPosY);
+
+	MoveTo(iPosX, iPosY - 50);
+	LineTo(iPosX, iPosY + 50);
+}
+
+// Свой класс кнопки
 class CMyButton : public CButton
 {
 public:
@@ -140,7 +163,7 @@ void CMainWnd::OnLButtonDblClk(UINT, CPoint)
 CMainWnd::CMainWnd() : blMenu(FALSE)
 {
 	// Создание окна программы
-	Create(NULL, L"Step_Ten", WS_OVERLAPPEDWINDOW, rectDefault,
+	Create(NULL, L"Step_Twelve", WS_OVERLAPPEDWINDOW, rectDefault,
 		NULL, NULL);
 
 	// Создаём объект надписи
@@ -190,26 +213,57 @@ void CMainWnd::MenuExit()
 
 void CMainWnd::OnPaint()
 {
-	// Получение контекста устройства, то где рисовать
-	CPaintDC dc(this);
+	// Используем наш класс фигуры
+	CMyPaintDC dc(this);
 
-	// Вывод текста с определённых координат
-	dc.TextOutW(200, 200, L"Hello MFC Programm");
-	
-	dc.TextOutW(200, 216, L"Автор: Туров Виталий");
+	// Настраиваем перо
+	CPen MyPen(PS_DASHDOT, 1, RGB(0, 255, 0));
 
-	// Откуда начинать рисовать линию
-	dc.MoveTo(600, 300);
+	// Выбираем перо для использования
+	dc.SelectObject(MyPen);
 
-	// До куда вести линию от точки начала и от куда вести дальше
-	dc.LineTo(600, 55);
+	for (int x = 1; x < 400; x += 50)
+		dc.DrawCross(x + 100, x + 100);
 
-	// Понятно
-	dc.LineTo(0, 55);
+	//// Получение контекста устройства, то где рисовать
+	//CPaintDC dc(this);
 
-	dc.LineTo(0, 300);
+	////Вывод текста с определённых координат
+	//dc.TextOutW(200, 200, L"Hello MFC Programm");
 
-	dc.LineTo(600, 300);
+	//dc.TextOutW(200, 216, L"Автор: Туров Виталий");
+
+	////Откуда начинать рисовать линию
+	//dc.MoveTo(600, 300);
+
+	////До куда вести линию от точки начала и от куда вести дальше
+	//dc.LineTo(600, 55);
+
+	////Понятно
+	//dc.LineTo(0, 55);
+
+	//dc.LineTo(0, 300);
+
+	//dc.LineTo(600, 300);
+
+	////Первый пример: вывод текста
+	//dc.TextOutW(200, 200, L"TextOut Samples");
+
+	//// Второй пример: вывод точки
+	//dc.SetPixel(200, 200, RGB(255, 0, 0));
+
+	//// Третий пример: вывод дуги окружности
+	//dc.Arc(200, 200, 100, 100, 400, 400, 10, 10);
+
+	//// Четвёртый пример: вывод замкнутой дуги
+	//dc.Chord(250, 250, 100, 100, 400, 400, 10, 10);
+
+	//// Пятый пример: вывод эллиписа
+	//dc.Ellipse(450, 450, 50, 150);
+
+	//// Шестой пример: вывод линии
+	//dc.MoveTo(200, 200);
+	//dc.LineTo(100, 100);
 }
 
 CMainWnd::~CMainWnd()
