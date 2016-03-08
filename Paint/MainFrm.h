@@ -1,0 +1,43 @@
+
+// MainFrm.h : интерфейс класса CMainFrame
+//
+
+#pragma once
+
+class CMainFrame : public CFrameWnd
+{
+	
+protected: // создать только из сериализации
+	CMainFrame();
+	DECLARE_DYNCREATE(CMainFrame)
+
+// Атрибуты
+public:
+	CMenu		m_wndMenu;
+	CToolBar	m_wndToolBar;
+
+// Операции
+public:
+
+// Переопределение
+public:
+	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+
+// Реализация
+public:
+	virtual ~CMainFrame();
+#ifdef _DEBUG
+	virtual void AssertValid() const;
+	virtual void Dump(CDumpContext& dc) const;
+#endif
+
+
+// Созданные функции схемы сообщений
+protected:
+	DECLARE_MESSAGE_MAP()
+
+public:
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+};
+
+
