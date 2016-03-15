@@ -52,7 +52,7 @@ void CPaintView::PaintBrush()
 {
 	auto *mList = GetDocument()->m_ListLine;
 
-	auto current_position = mList->GetTailPosition();
+	auto current_position = mList->GetHeadPosition();
 
 	while (current_position != NULL)
 	{

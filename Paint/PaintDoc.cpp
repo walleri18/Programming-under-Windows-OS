@@ -44,6 +44,10 @@ BOOL CPaintDoc::OnNewDocument()
 	if (!CDocument::OnNewDocument())
 		return FALSE;
 
+	m_ListLine->RemoveAll();
+	
+	delete m_ListLine;
+
 	// Создаём новый список линий
 	m_ListLine = new CList<Line, Line&>();
 
@@ -56,35 +60,29 @@ void CPaintDoc::Serialize(CArchive& ar)
 {
 	if (ar.IsStoring())
 	{
-		/*ar << m_ListLine->GetCount();
-
-		auto current_position = m_ListLine->GetTailPosition();
+		auto current_position = m_ListLine->GetHeadPosition();
 
 		while (current_position != NULL)
 		{
 			m_ListLine->GetAt(current_position).Serialize(ar);
 
 			current_position = m_ListLine->Find(m_ListLine->GetNext(current_position));
-		}*/
+		}
 
-		m_ListLine->Serialize(ar);
+		//m_ListLine->Serialize(ar);
 	}
 	else
 	{
-		/*int count;
-
-		ar >> count;
-
-		for (int i = 0; i < count; i++)
+		while (!ar.IsBufferEmpty())
 		{
 			Line tmp;
 
 			tmp.Serialize(ar);
 
 			m_ListLine->AddHead(tmp);
-		}*/
+		}
 
-		m_ListLine->Serialize(ar);
+		//m_ListLine->Serialize(ar);
 	}
 }
 

@@ -25,7 +25,7 @@ struct Line
 	//Конструктор без параметров
 	Line() {}
 
-	/*void Serialize(CArchive& ar)
+	void Serialize(CArchive& ar)
 	{
 		if (ar.IsStoring())
 		{
@@ -36,7 +36,7 @@ struct Line
 			ar >> x_begin >> y_begin >> x_end >> y_end >> color >> extensive;
 		}
 	}
-	*/
+	
 	/*friend BOOL operator == (Line a, Line b)
 	{
 		if (a.color == b.color)
