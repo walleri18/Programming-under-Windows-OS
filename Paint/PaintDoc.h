@@ -25,18 +25,29 @@ struct Line
 	//Конструктор без параметров
 	Line() {}
 
-	void Serialize(CArchive& ar)
+	/*void Serialize(CArchive& ar)
 	{
 		if (ar.IsStoring())
 		{
-			ar << x_begin << " " << x_end << " " << y_begin << " " << y_end << " " << color << " " << extensive << " ";
+			ar << x_begin << y_begin << x_end << y_end << color << extensive;
 		}
-
 		else
 		{
-			ar >> x_begin >> x_end >> y_begin >> y_end >> color >> extensive;
+			ar >> x_begin >> y_begin >> x_end >> y_end >> color >> extensive;
 		}
 	}
+	*/
+	/*friend BOOL operator == (Line a, Line b)
+	{
+		if (a.color == b.color)
+			if (a.extensive == b.extensive)
+				if (a.x_begin == b.x_begin)
+					if (a.x_end == b.x_end)
+						if (a.y_begin == b.y_begin)
+							if (a.y_end == b.y_end)
+								return TRUE;
+		return FALSE;
+	}*/
 };
 
 class CPaintDoc : public CDocument

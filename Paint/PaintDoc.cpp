@@ -56,31 +56,35 @@ void CPaintDoc::Serialize(CArchive& ar)
 {
 	if (ar.IsStoring())
 	{
-		ar << m_ListLine->GetCount() << " ";
+		/*ar << m_ListLine->GetCount();
 
-		// Получаем нулевую позиццию
-		auto current = m_ListLine->GetTailPosition();
+		auto current_position = m_ListLine->GetTailPosition();
 
-		for (; current != NULL; m_ListLine->RemoveTail(), current = m_ListLine->GetTailPosition())
+		while (current_position != NULL)
 		{
-			m_ListLine->GetAt(current).Serialize(ar);
-		}
+			m_ListLine->GetAt(current_position).Serialize(ar);
+
+			current_position = m_ListLine->Find(m_ListLine->GetNext(current_position));
+		}*/
+
+		m_ListLine->Serialize(ar);
 	}
 	else
 	{
-		int count;
+		/*int count;
 
 		ar >> count;
-
-		m_ListLine->RemoveAll();
 
 		for (int i = 0; i < count; i++)
 		{
 			Line tmp;
+
 			tmp.Serialize(ar);
 
 			m_ListLine->AddHead(tmp);
-		}
+		}*/
+
+		m_ListLine->Serialize(ar);
 	}
 }
 

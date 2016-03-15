@@ -48,14 +48,50 @@ BOOL CPaintView::PreCreateWindow(CREATESTRUCT& cs)
 
 // рисование CPaintView
 
+void CPaintView::PaintBrush()
+{
+	auto *mList = GetDocument()->m_ListLine;
+
+	auto current_position = mList->GetTailPosition();
+
+	while (current_position != NULL)
+	{
+		// Жирность линии
+		int extensive = mList->GetAt(current_position).extensive;
+
+		// Цвет линии
+		COLORREF color = mList->GetAt(current_position).color;
+
+		// Создаём временный объект линии
+		Line tmp(mList->GetAt(current_position).x_begin, 
+				 mList->GetAt(current_position).y_begin, 
+				 mList->GetAt(current_position).x_end, 
+				 mList->GetAt(current_position).y_end, 
+				 color, extensive);
+
+		// Создаём средство рисования
+		CClientDC dc(this);
+
+		// Создаём нужную кисть
+		CPen newPen(PS_SOLID, extensive, color);
+
+		// Установить новое перо текущим
+		dc.SelectObject(&newPen);
+
+		// Провести линию от предыдущей точки до текущей
+		dc.MoveTo(mList->GetAt(current_position).x_begin, mList->GetAt(current_position).y_begin); // поместить графический курсор
+		dc.LineTo(mList->GetAt(current_position).x_end, mList->GetAt(current_position).y_end); // рисовать до текущей
+
+		current_position = mList->Find(mList->GetNext(current_position));
+	}
+}
+
 void CPaintView::OnDraw(CDC* /*pDC*/)
 {
 	CPaintDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
-
-	// TODO: добавьте здесь код отрисовки для собственных данных
 }
 
 
@@ -109,6 +145,10 @@ void CPaintView::OnMouseMove(UINT nFlags, CPoint point)
 	if (isPencil == TRUE)
 	{
 
+		// Проверка на нажатие левой клавишы
+		if ((nFlags & MK_LBUTTON) != MK_LBUTTON)
+			return;
+
 		// Жирность линии
 		int extensive = GetDocument()->extensive;
 
@@ -117,10 +157,6 @@ void CPaintView::OnMouseMove(UINT nFlags, CPoint point)
 
 		// Создаём временный объект линии
 		Line tmp(previous_x, previous_y, point.x, point.y, color, extensive);
-
-		// Проверка на нажатие левой клавишы
-		if ((nFlags & MK_LBUTTON) != MK_LBUTTON)
-			return;
 
 		// Создаём средство рисования
 		CClientDC dc(this);
@@ -144,7 +180,38 @@ void CPaintView::OnMouseMove(UINT nFlags, CPoint point)
 	}
 	else
 	{
-		// Удалять 
+		// Проверка на нажатие левой клавишы
+		if ((nFlags & MK_LBUTTON) != MK_LBUTTON)
+			return;
+
+		// Жирность линии
+		int extensive = 3 * GetDocument()->extensive;
+
+		// Цвет линии
+		COLORREF color = RGB(255, 255, 255);
+
+		// Создаём временный объект линии
+		Line tmp(previous_x, previous_y, point.x, point.y, color, extensive);
+
+		// Создаём средство рисования
+		CClientDC dc(this);
+
+		// Создаём нужную кисть
+		CPen newPen(PS_SOLID, extensive, color);
+
+		// Установить новое перо текущим
+		dc.SelectObject(&newPen);
+
+		// Провести линию от предыдущей точки до текущей
+		dc.MoveTo(previous_x, previous_y); // поместить графический курсор
+		dc.LineTo(point.x, point.y); // рисовать до текущей
+
+		// Страховка
+		previous_x = point.x;
+		previous_y = point.y;
+
+		// Добавляем объект линии в список
+		GetDocument()->GetListLine()->AddHead(tmp);
 	}
 	CView::OnMouseMove(nFlags, point);
 }
@@ -157,4 +224,9 @@ void CPaintView::OnLButtonDown(UINT nFlags, CPoint point)
 	previous_y = point.y;
 
 	CView::OnLButtonDown(nFlags, point);
+}
+
+void CPaintView::OnUpdate(CView* /*pSender*/, LPARAM /*lHint*/, CObject* /*pHint*/)
+{
+	this->PaintBrush();
 }

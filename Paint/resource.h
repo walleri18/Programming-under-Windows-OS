@@ -19,7 +19,6 @@
 #define IDI_ICON2                       329
 #define IDD_DIALOG_EXTENSIVE            336
 #define IDCANCEL                        1004
-#define IDC_EDIT1                       1005
 #define IDC_EDIT_EXTENSIVE              1005
 #define ID_32771                        32771
 #define ID_32772                        32772
@@ -32,13 +31,16 @@
 #define ID_Clear                        32779
 #define ID_BUTTON32786                  32786
 #define ID_COLOR                        32787
+#define ID_32788                        32788
+#define ID_32789                        32789
+#define ID_Pererisobka                  32790
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        338
-#define _APS_NEXT_COMMAND_VALUE         32788
+#define _APS_NEXT_COMMAND_VALUE         32791
 #define _APS_NEXT_CONTROL_VALUE         1006
 #define _APS_NEXT_SYMED_VALUE           310
 #endif

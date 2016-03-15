@@ -24,6 +24,8 @@ public:
 
 // Операции
 public:
+	// Метод отрисовки  списка
+	void PaintBrush();
 
 // Переопределение
 public:
@@ -45,11 +47,12 @@ protected:
 protected:
 	DECLARE_MESSAGE_MAP()
 public:
-//	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	afx_msg void OnBrush();
 	afx_msg void OnClear();
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnPererisobka();
+	virtual void OnUpdate(CView* /*pSender*/, LPARAM /*lHint*/, CObject* /*pHint*/);
 };
 
 #ifndef _DEBUG  // отладочная версия в PaintView.cpp
