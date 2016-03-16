@@ -25,19 +25,7 @@ struct Line
 	//Конструктор без параметров
 	Line() {}
 
-	void Serialize(CArchive& ar)
-	{
-		if (ar.IsStoring())
-		{
-			ar << x_begin << y_begin << x_end << y_end << color << extensive;
-		}
-		else
-		{
-			ar >> x_begin >> y_begin >> x_end >> y_end >> color >> extensive;
-		}
-	}
-	
-	/*friend BOOL operator == (Line a, Line b)
+	friend BOOL operator == (Line a, Line b)
 	{
 		if (a.color == b.color)
 			if (a.extensive == b.extensive)
@@ -47,7 +35,7 @@ struct Line
 							if (a.y_end == b.y_end)
 								return TRUE;
 		return FALSE;
-	}*/
+	}
 };
 
 class CPaintDoc : public CDocument

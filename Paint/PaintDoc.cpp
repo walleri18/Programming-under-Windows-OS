@@ -29,7 +29,7 @@ END_MESSAGE_MAP()
 
 // создание/уничтожение CPaintDoc
 
-CPaintDoc::CPaintDoc() : extensive(1), color(RGB(0, 0, 0))
+CPaintDoc::CPaintDoc() : extensive(1), color(RGB(0, 0, 0)), m_ListLine(NULL)
 {
 	// TODO: добавьте код для одноразового вызова конструктора
 
@@ -43,10 +43,9 @@ BOOL CPaintDoc::OnNewDocument()
 {
 	if (!CDocument::OnNewDocument())
 		return FALSE;
-
-	m_ListLine->RemoveAll();
 	
-	delete m_ListLine;
+	if (m_ListLine)
+		delete m_ListLine;
 
 	// Создаём новый список линий
 	m_ListLine = new CList<Line, Line&>();
@@ -58,31 +57,11 @@ BOOL CPaintDoc::OnNewDocument()
 
 void CPaintDoc::Serialize(CArchive& ar)
 {
-	if (ar.IsStoring())
+	if (m_ListLine)
 	{
-		auto current_position = m_ListLine->GetHeadPosition();
+		m_ListLine->Serialize(ar);
 
-		while (current_position != NULL)
-		{
-			m_ListLine->GetAt(current_position).Serialize(ar);
-
-			current_position = m_ListLine->Find(m_ListLine->GetNext(current_position));
-		}
-
-		//m_ListLine->Serialize(ar);
-	}
-	else
-	{
-		while (!ar.IsBufferEmpty())
-		{
-			Line tmp;
-
-			tmp.Serialize(ar);
-
-			m_ListLine->AddHead(tmp);
-		}
-
-		//m_ListLine->Serialize(ar);
+		this->UpdateAllViews(NULL);
 	}
 }
 

@@ -159,6 +159,3 @@ void CPaintApp::OnAppAbout()
 }
 
 // обработчики сообщений CPaintApp
-
-
-

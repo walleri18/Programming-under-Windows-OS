@@ -64,15 +64,17 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
-	m_wndMenu.CreateMenu();
-	m_wndMenu.LoadMenu(IDR_MENU_MAIN);
-	
-	m_wndToolBar.Create(this);
-	m_wndToolBar.LoadToolBar(IDR_TOOLBAR_MAIN);
+	if (!m_wndToolBar.CreateEx(this, TBSTYLE_FLAT, WS_CHILD | WS_VISIBLE | CBRS_TOP | CBRS_GRIPPER | CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC) ||
+		!m_wndToolBar.LoadToolBar(IDR_TOOLBAR_MAIN))
+	{
+		TRACE0("Не удалось создать панель инструментов\n");
+		return -1;      // не удалось создать
+	}
 
-	m_wndToolBar.EnableDocking(CBRS_ALIGN_TOP);
-	EnableDocking(CBRS_ALIGN_TOP);
-	DockControlBar(&m_wndToolBar, AFX_IDW_DOCKBAR_TOP);
+	// TODO: Удалите эти три строки, если не собираетесь закреплять панель инструментов
+	m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);
+	EnableDocking(CBRS_ALIGN_ANY);
+	DockControlBar(&m_wndToolBar);
 
 	return 0;
 }

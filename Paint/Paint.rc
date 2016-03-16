@@ -68,30 +68,18 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON                    "C:\\Users\\1\\Documents\\Visual Studio 2015\\Projects\\Программирование под ОС Windows\\Programming-under-Windows-OS\\Paint\\res\\Paint.ico"
-
-IDR_PaintTYPE           ICON                    "C:\\Users\\1\\Documents\\Visual Studio 2015\\Projects\\Программирование под ОС Windows\\Programming-under-Windows-OS\\Paint\\res\\PaintDoc.ico"
-
-IDI_ABOUT               ICON                    "C:\\Users\\1\\Documents\\Visual Studio 2015\\Projects\\Программирование под ОС Windows\\Programming-under-Windows-OS\\Paint\\res\\about.ico"
-
-IDI_HEIGHT              ICON                    "C:\\Users\\1\\Documents\\Visual Studio 2015\\Projects\\Программирование под ОС Windows\\Programming-under-Windows-OS\\Paint\\res\\height.ico"
-
-IDI_LASTIK              ICON                    "C:\\Users\\1\\Documents\\Visual Studio 2015\\Projects\\Программирование под ОС Windows\\Programming-under-Windows-OS\\Paint\\res\\lastik.ico"
-
-IDI_NEW_DOC             ICON                    "C:\\Users\\1\\Documents\\Visual Studio 2015\\Projects\\Программирование под ОС Windows\\Programming-under-Windows-OS\\Paint\\res\\new.ico"
-
-IDI_OPEN_FILE           ICON                    "C:\\Users\\1\\Documents\\Visual Studio 2015\\Projects\\Программирование под ОС Windows\\Programming-under-Windows-OS\\Paint\\res\\open.ico"
-
-IDI_PALETTER            ICON                    "C:\\Users\\1\\Documents\\Visual Studio 2015\\Projects\\Программирование под ОС Windows\\Programming-under-Windows-OS\\Paint\\res\\palette.ico"
-
-IDI_PEN                 ICON                    "C:\\Users\\1\\Documents\\Visual Studio 2015\\Projects\\Программирование под ОС Windows\\Programming-under-Windows-OS\\Paint\\res\\pen.ico"
-
-IDI_SAVE_FILE           ICON                    "C:\\Users\\1\\Documents\\Visual Studio 2015\\Projects\\Программирование под ОС Windows\\Programming-under-Windows-OS\\Paint\\res\\save.ico"
-
+IDR_MAINFRAME           ICON                    "res\\Paint.ico"
+IDR_PaintTYPE           ICON                    "res\\PaintDoc.ico"
+IDI_ABOUT               ICON                    "res\\about.ico"
+IDI_HEIGHT              ICON                    "res\\height.ico"
+IDI_LASTIK              ICON                    "res\\lastik.ico"
+IDI_NEW_DOC             ICON                    "res\\new.ico"
+IDI_OPEN_FILE           ICON                    "res\\open.ico"
+IDI_PALETTER            ICON                    "res\\palette.ico"
+IDI_PEN                 ICON                    "res\\pen.ico"
+IDI_SAVE_FILE           ICON                    "res\\save.ico"
 IDI_ICON1               ICON                    "res\\Paint.ico"
-
 IDI_ICON2               ICON                    "res\\PaintDoc.ico"
-
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -169,7 +157,7 @@ CAPTION "Ширина линии"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "ОК",IDOK,19,49,50,14
-    PUSHBUTTON      "Отмена",IDCANCEL,80,49,50,14
+    PUSHBUTTON      "Отмена",2,80,49,50,14
     LTEXT           "Введите ширину линии в пикселях:",IDC_STATIC,17,14,121,8
     EDITTEXT        IDC_EDIT_EXTENSIVE,18,30,119,14,ES_CENTER | ES_AUTOHSCROLL | ES_NUMBER
 END
@@ -243,22 +231,6 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
-// AFX_DIALOG_LAYOUT
-//
-
-IDD_ABOUTBOX AFX_DIALOG_LAYOUT
-BEGIN
-    0
-END
-
-IDD_DIALOG_EXTENSIVE AFX_DIALOG_LAYOUT
-BEGIN
-    0
-END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
 // Toolbar
 //
 
@@ -285,7 +257,6 @@ END
 //
 
 IDR_TOOLBAR_MAIN        BITMAP                  "res\\toolbar.bmp"
-
 
 /////////////////////////////////////////////////////////////////////////////
 //

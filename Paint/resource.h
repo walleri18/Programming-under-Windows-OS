@@ -4,7 +4,6 @@
 //
 #define IDD_ABOUTBOX                    100
 #define IDR_MAINFRAME                   128
-#define IDR_MENU_MAIN                   128
 #define IDR_PaintTYPE                   130
 #define IDR_TOOLBAR_MAIN                311
 #define IDI_ABOUT                       313
@@ -18,7 +17,6 @@
 #define IDI_ICON1                       328
 #define IDI_ICON2                       329
 #define IDD_DIALOG_EXTENSIVE            336
-#define IDCANCEL                        1004
 #define IDC_EDIT_EXTENSIVE              1005
 #define ID_32771                        32771
 #define ID_32772                        32772
@@ -29,11 +27,9 @@
 #define ID_COLOR_LINE                   32777
 #define ID_Brush                        32778
 #define ID_Clear                        32779
-#define ID_BUTTON32786                  32786
 #define ID_COLOR                        32787
 #define ID_32788                        32788
 #define ID_32789                        32789
-#define ID_Pererisobka                  32790
 
 // Next default values for new objects
 // 

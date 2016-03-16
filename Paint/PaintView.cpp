@@ -16,7 +16,6 @@
 #define new DEBUG_NEW
 #endif
 
-
 // CPaintView
 
 IMPLEMENT_DYNCREATE(CPaintView, CView)
@@ -48,11 +47,16 @@ BOOL CPaintView::PreCreateWindow(CREATESTRUCT& cs)
 
 // рисование CPaintView
 
-void CPaintView::PaintBrush()
+void CPaintView::OnDraw(CDC* pDC)
 {
-	auto *mList = GetDocument()->m_ListLine;
+	CPaintDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
 
-	auto current_position = mList->GetHeadPosition();
+	auto *mList = GetDocument()->GetListLine();
+
+	auto current_position = mList->GetTailPosition();
 
 	while (current_position != NULL)
 	{
@@ -63,37 +67,27 @@ void CPaintView::PaintBrush()
 		COLORREF color = mList->GetAt(current_position).color;
 
 		// Создаём временный объект линии
-		Line tmp(mList->GetAt(current_position).x_begin, 
-				 mList->GetAt(current_position).y_begin, 
-				 mList->GetAt(current_position).x_end, 
-				 mList->GetAt(current_position).y_end, 
-				 color, extensive);
-
-		// Создаём средство рисования
-		CClientDC dc(this);
+		Line tmp(mList->GetAt(current_position).x_begin,
+			mList->GetAt(current_position).y_begin,
+			mList->GetAt(current_position).x_end,
+			mList->GetAt(current_position).y_end,
+			color, extensive);
 
 		// Создаём нужную кисть
 		CPen newPen(PS_SOLID, extensive, color);
 
 		// Установить новое перо текущим
-		dc.SelectObject(&newPen);
+		pDC->SelectObject(&newPen);
 
 		// Провести линию от предыдущей точки до текущей
-		dc.MoveTo(mList->GetAt(current_position).x_begin, mList->GetAt(current_position).y_begin); // поместить графический курсор
-		dc.LineTo(mList->GetAt(current_position).x_end, mList->GetAt(current_position).y_end); // рисовать до текущей
+		pDC->MoveTo(mList->GetAt(current_position).x_begin,
+			mList->GetAt(current_position).y_begin); // поместить графический курсор
+		pDC->LineTo(mList->GetAt(current_position).x_end,
+			mList->GetAt(current_position).y_end); // рисовать до текущей
 
 		current_position = mList->Find(mList->GetNext(current_position));
 	}
 }
-
-void CPaintView::OnDraw(CDC* /*pDC*/)
-{
-	CPaintDoc* pDoc = GetDocument();
-	ASSERT_VALID(pDoc);
-	if (!pDoc)
-		return;
-}
-
 
 // диагностика CPaintView
 
@@ -115,7 +109,6 @@ CPaintDoc* CPaintView::GetDocument() const // встроена неотлаженная версия
 }
 #endif //_DEBUG
 
-
 // обработчики сообщений CPaintView
 
 void CPaintView::OnBrush()
@@ -128,7 +121,6 @@ void CPaintView::OnBrush()
 	AfxGetApp()->m_pMainWnd->GetMenu()->CheckMenuItem(ID_Clear, MF_UNCHECKED);
 }
 
-
 void CPaintView::OnClear()
 {
 	isPencil = FALSE;
@@ -138,7 +130,6 @@ void CPaintView::OnClear()
 	// Ставим галочку с пункта ластик
 	AfxGetApp()->m_pMainWnd->GetMenu()->CheckMenuItem(ID_Clear, MF_CHECKED);
 }
-
 
 void CPaintView::OnMouseMove(UINT nFlags, CPoint point)
 {
@@ -157,19 +148,6 @@ void CPaintView::OnMouseMove(UINT nFlags, CPoint point)
 
 		// Создаём временный объект линии
 		Line tmp(previous_x, previous_y, point.x, point.y, color, extensive);
-
-		// Создаём средство рисования
-		CClientDC dc(this);
-
-		// Создаём нужную кисть
-		CPen newPen(PS_SOLID, extensive, color);
-
-		// Установить новое перо текущим
-		dc.SelectObject(&newPen);
-
-		// Провести линию от предыдущей точки до текущей
-		dc.MoveTo(previous_x, previous_y); // поместить графический курсор
-		dc.LineTo(point.x, point.y); // рисовать до текущей
 
 		// Страховка
 		previous_x = point.x;
@@ -193,19 +171,6 @@ void CPaintView::OnMouseMove(UINT nFlags, CPoint point)
 		// Создаём временный объект линии
 		Line tmp(previous_x, previous_y, point.x, point.y, color, extensive);
 
-		// Создаём средство рисования
-		CClientDC dc(this);
-
-		// Создаём нужную кисть
-		CPen newPen(PS_SOLID, extensive, color);
-
-		// Установить новое перо текущим
-		dc.SelectObject(&newPen);
-
-		// Провести линию от предыдущей точки до текущей
-		dc.MoveTo(previous_x, previous_y); // поместить графический курсор
-		dc.LineTo(point.x, point.y); // рисовать до текущей
-
 		// Страховка
 		previous_x = point.x;
 		previous_y = point.y;
@@ -216,7 +181,6 @@ void CPaintView::OnMouseMove(UINT nFlags, CPoint point)
 	CView::OnMouseMove(nFlags, point);
 }
 
-
 void CPaintView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// Записываем координаты нажатия
@@ -224,9 +188,4 @@ void CPaintView::OnLButtonDown(UINT nFlags, CPoint point)
 	previous_y = point.y;
 
 	CView::OnLButtonDown(nFlags, point);
-}
-
-void CPaintView::OnUpdate(CView* /*pSender*/, LPARAM /*lHint*/, CObject* /*pHint*/)
-{
-	this->PaintBrush();
 }

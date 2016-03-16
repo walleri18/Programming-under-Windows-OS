@@ -24,8 +24,6 @@ public:
 
 // Операции
 public:
-	// Метод отрисовки  списка
-	void PaintBrush();
 
 // Переопределение
 public:
@@ -51,8 +49,6 @@ public:
 	afx_msg void OnClear();
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
-	afx_msg void OnPererisobka();
-	virtual void OnUpdate(CView* /*pSender*/, LPARAM /*lHint*/, CObject* /*pHint*/);
 };
 
 #ifndef _DEBUG  // отладочная версия в PaintView.cpp
