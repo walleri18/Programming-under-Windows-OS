@@ -58,6 +58,9 @@ public:
 	// Позиция головы списка
 	POSITION header;
 
+	// Проверка нажатия левой клавиши мыши
+	BOOL isLeftButtonMouse;
+
 // Операции
 public:
 	// Геттер списка

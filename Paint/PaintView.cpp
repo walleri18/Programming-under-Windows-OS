@@ -25,11 +25,12 @@ BEGIN_MESSAGE_MAP(CPaintView, CView)
 	ON_COMMAND(ID_Clear, &CPaintView::OnClear)
 	ON_WM_MOUSEMOVE()
 	ON_WM_LBUTTONDOWN()
+	ON_WM_LBUTTONUP()
 END_MESSAGE_MAP()
 
 // создание/уничтожение CPaintView
 
-CPaintView::CPaintView() : isPencil()
+CPaintView::CPaintView() : isPencil(TRUE)
 {
 }
 
@@ -133,51 +134,48 @@ void CPaintView::OnClear()
 
 void CPaintView::OnMouseMove(UINT nFlags, CPoint point)
 {
-	if (isPencil == TRUE)
+	// Проверка на нажатие левой клавишы
+	//if ((nFlags | MK_LBUTTON) == MK_LBUTTON)
+	if (GetDocument()->isLeftButtonMouse == TRUE)
 	{
+		if (isPencil == TRUE)
+		{
+			// Жирность линии
+			int extensive = GetDocument()->extensive;
 
-		// Проверка на нажатие левой клавишы
-		if ((nFlags & MK_LBUTTON) != MK_LBUTTON)
-			return;
+			// Цвет линии
+			COLORREF color = GetDocument()->color;
 
-		// Жирность линии
-		int extensive = GetDocument()->extensive;
+			// Создаём временный объект линии
+			Line tmp(previous_x, previous_y, point.x, point.y, color, extensive);
 
-		// Цвет линии
-		COLORREF color = GetDocument()->color;
+			// Страховка
+			previous_x = point.x;
+			previous_y = point.y;
 
-		// Создаём временный объект линии
-		Line tmp(previous_x, previous_y, point.x, point.y, color, extensive);
+			// Добавляем объект линии в список
+			GetDocument()->GetListLine()->AddHead(tmp);
+		}
+		else
+		{
+			// Жирность линии
+			int extensive = 3 * GetDocument()->extensive;
 
-		// Страховка
-		previous_x = point.x;
-		previous_y = point.y;
+			// Цвет линии
+			COLORREF color = RGB(255, 255, 255);
 
-		// Добавляем объект линии в список
-		GetDocument()->GetListLine()->AddHead(tmp);
+			// Создаём временный объект линии
+			Line tmp(previous_x, previous_y, point.x, point.y, color, extensive);
+
+			// Страховка
+			previous_x = point.x;
+			previous_y = point.y;
+
+			// Добавляем объект линии в список
+			GetDocument()->GetListLine()->AddHead(tmp);
+		}
 	}
-	else
-	{
-		// Проверка на нажатие левой клавишы
-		if ((nFlags & MK_LBUTTON) != MK_LBUTTON)
-			return;
 
-		// Жирность линии
-		int extensive = 3 * GetDocument()->extensive;
-
-		// Цвет линии
-		COLORREF color = RGB(255, 255, 255);
-
-		// Создаём временный объект линии
-		Line tmp(previous_x, previous_y, point.x, point.y, color, extensive);
-
-		// Страховка
-		previous_x = point.x;
-		previous_y = point.y;
-
-		// Добавляем объект линии в список
-		GetDocument()->GetListLine()->AddHead(tmp);
-	}
 	CView::OnMouseMove(nFlags, point);
 }
 
@@ -187,5 +185,16 @@ void CPaintView::OnLButtonDown(UINT nFlags, CPoint point)
 	previous_x = point.x;
 	previous_y = point.y;
 
+	// Нажата левая клавиша мыши
+	GetDocument()->isLeftButtonMouse = TRUE;
+
 	CView::OnLButtonDown(nFlags, point);
+}
+
+void CPaintView::OnLButtonUp(UINT nFlags, CPoint point)
+{
+	// Левая клавиша отпущена
+	GetDocument()->isLeftButtonMouse = FALSE;
+
+	CView::OnLButtonUp(nFlags, point);
 }

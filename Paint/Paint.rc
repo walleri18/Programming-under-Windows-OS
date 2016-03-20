@@ -69,24 +69,36 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\Paint.ico"
+
 IDR_PaintTYPE           ICON                    "res\\PaintDoc.ico"
+
 IDI_ABOUT               ICON                    "res\\about.ico"
+
 IDI_HEIGHT              ICON                    "res\\height.ico"
+
 IDI_LASTIK              ICON                    "res\\lastik.ico"
+
 IDI_NEW_DOC             ICON                    "res\\new.ico"
+
 IDI_OPEN_FILE           ICON                    "res\\open.ico"
+
 IDI_PALETTER            ICON                    "res\\palette.ico"
+
 IDI_PEN                 ICON                    "res\\pen.ico"
+
 IDI_SAVE_FILE           ICON                    "res\\save.ico"
+
 IDI_ICON1               ICON                    "res\\Paint.ico"
+
 IDI_ICON2               ICON                    "res\\PaintDoc.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Menu
 //
 
-IDR_MENU_MAIN MENU
+IDR_MAINFRAME MENU
 BEGIN
     POPUP "&Τΰιλ"
     BEGIN
@@ -257,6 +269,7 @@ END
 //
 
 IDR_TOOLBAR_MAIN        BITMAP                  "res\\toolbar.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

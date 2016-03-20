@@ -29,7 +29,7 @@ END_MESSAGE_MAP()
 
 // создание/уничтожение CPaintDoc
 
-CPaintDoc::CPaintDoc() : extensive(1), color(RGB(0, 0, 0)), m_ListLine(NULL)
+CPaintDoc::CPaintDoc() : extensive(1), color(RGB(0, 0, 0)), m_ListLine(NULL), isLeftButtonMouse(FALSE)
 {
 	// TODO: добавьте код дл€ одноразового вызова конструктора
 
@@ -58,11 +58,7 @@ BOOL CPaintDoc::OnNewDocument()
 void CPaintDoc::Serialize(CArchive& ar)
 {
 	if (m_ListLine)
-	{
 		m_ListLine->Serialize(ar);
-
-		this->UpdateAllViews(NULL);
-	}
 }
 
 // диагностика CPaintDoc
