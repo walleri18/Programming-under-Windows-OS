@@ -55,13 +55,18 @@ void CPaintView::OnDraw(CDC* pDC)
 	if (!pDoc)
 		return;
 
-	// Создаём новый контекст устройства на основе старого для совместимости
-	CDC *newCDC = new CDC;
-	newCDC->CreateCompatibleDC(pDC);
+	// Узнаём размеры окна
+	CRect rect = new CRect;
+	GetClientRect(rect);
 
-	// Создаём контекст растрового изображения
-	CBitmap *newBitmap = new CBitmap;
-	newBitmap->CreateCompatibleBitmap(newCDC, INT_MAX, INT_MAX);
+	// Создаём новый контекст устройства
+	CDC p_newDC;
+	p_newDC.CreateCompatibleDC(pDC);
+
+	// Создаём изображение совместимое с данным контекстным устройством
+	m_Bitmap.CreateCompatibleBitmap(pDC, rect.Width(), rect.Height());
+
+	p_newDC.SelectObject(&m_Bitmap);
 
 	auto *mList = GetDocument()->GetListLine();
 
@@ -69,9 +74,6 @@ void CPaintView::OnDraw(CDC* pDC)
 
 	while (current_position != NULL)
 	{
-		// Копируем из старого контекста устройства изображение в новый контекст устройства
-		//newCDC->BitBlt(0, 0, INT_MAX, INT_MAX, pDC, 0, 0, SRCCOPY);
-
 		// Жирность линии
 		int extensive = mList->GetAt(current_position).extensive;
 
@@ -89,18 +91,18 @@ void CPaintView::OnDraw(CDC* pDC)
 		CPen newPen(PS_SOLID, extensive, color);
 
 		// Установить новое перо текущим
-		pDC->SelectObject(&newPen);
+		p_newDC.SelectObject(&newPen);
 
 		// Провести линию от предыдущей точки до текущей
-		pDC->MoveTo(mList->GetAt(current_position).x_begin,
+		p_newDC.MoveTo(mList->GetAt(current_position).x_begin,
 			mList->GetAt(current_position).y_begin); // поместить графический курсор
-		pDC->LineTo(mList->GetAt(current_position).x_end,
+		p_newDC.LineTo(mList->GetAt(current_position).x_end,
 			mList->GetAt(current_position).y_end); // рисовать до текущей
 
 		mList->GetPrev(current_position);
 	}
 
-	/*pDC->Set*/
+	DisplayBitmap(pDC, &m_Bitmap, 0, 0);
 
 }
 

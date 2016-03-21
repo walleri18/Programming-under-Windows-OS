@@ -22,6 +22,23 @@ public:
 	int previous_x;
 	int previous_y;
 
+	// Изображение
+	CBitmap m_Bitmap;
+
+	// Вывод изображения на экран
+	void DisplayBitmap(CDC *PDC, CBitmap *PBitmap, int X, int Y)
+	{
+		BITMAP BM;
+		CDC MemDC;
+
+		MemDC.CreateCompatibleDC(NULL);
+		MemDC.SelectObject(PBitmap);
+
+		PBitmap->GetObject(sizeof(BM), &BM);
+
+		PDC->BitBlt(X, Y, BM.bmWidth, BM.bmHeight, &MemDC, 0, 0, SRCCOPY);
+	}
+
 // Операции
 public:
 
