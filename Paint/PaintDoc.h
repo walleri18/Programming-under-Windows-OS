@@ -20,7 +20,7 @@ struct Line
 
 	// Конструктор с параметрами
 	Line(int x_begin, int y_begin, int x_end, int y_end, COLORREF color, int extensive) :
-		x_begin(x_begin), y_begin(y_begin), x_end(x_end), color(color), extensive(extensive) {}
+		x_begin(x_begin), y_begin(y_begin), x_end(x_end), y_end(y_end), color(color), extensive(extensive) {}
 	
 	//Конструктор без параметров
 	Line() {}

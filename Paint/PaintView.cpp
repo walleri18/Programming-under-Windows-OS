@@ -55,12 +55,23 @@ void CPaintView::OnDraw(CDC* pDC)
 	if (!pDoc)
 		return;
 
+	// Создаём новый контекст устройства на основе старого для совместимости
+	CDC *newCDC = new CDC;
+	newCDC->CreateCompatibleDC(pDC);
+
+	// Создаём контекст растрового изображения
+	CBitmap *newBitmap = new CBitmap;
+	newBitmap->CreateCompatibleBitmap(newCDC, INT_MAX, INT_MAX);
+
 	auto *mList = GetDocument()->GetListLine();
 
 	auto current_position = mList->GetTailPosition();
 
 	while (current_position != NULL)
 	{
+		// Копируем из старого контекста устройства изображение в новый контекст устройства
+		//newCDC->BitBlt(0, 0, INT_MAX, INT_MAX, pDC, 0, 0, SRCCOPY);
+
 		// Жирность линии
 		int extensive = mList->GetAt(current_position).extensive;
 
@@ -86,8 +97,11 @@ void CPaintView::OnDraw(CDC* pDC)
 		pDC->LineTo(mList->GetAt(current_position).x_end,
 			mList->GetAt(current_position).y_end); // рисовать до текущей
 
-		current_position = mList->Find(mList->GetNext(current_position));
+		mList->GetPrev(current_position);
 	}
+
+	/*pDC->Set*/
+
 }
 
 // диагностика CPaintView
@@ -174,6 +188,8 @@ void CPaintView::OnMouseMove(UINT nFlags, CPoint point)
 			// Добавляем объект линии в список
 			GetDocument()->GetListLine()->AddHead(tmp);
 		}
+
+		Invalidate();
 	}
 
 	CView::OnMouseMove(nFlags, point);
