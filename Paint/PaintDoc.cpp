@@ -43,6 +43,8 @@ BOOL CPaintDoc::OnNewDocument()
 {
 	if (!CDocument::OnNewDocument())
 		return FALSE;
+
+	
 	
 	if (m_ListLine)
 		delete m_ListLine;
@@ -82,6 +84,10 @@ void CPaintDoc::Dump(CDumpContext& dc) const
 void CPaintDoc::OnColorLine()
 {
 	CColorDialog dlg;
+	dlg.m_cc.Flags |= CC_RGBINIT;
+	dlg.m_cc.Flags |= CC_FULLOPEN;
+
+	dlg.m_cc.rgbResult = color;
 
 	dlg.DoModal();
 
@@ -92,9 +98,18 @@ void CPaintDoc::OnColorLine()
 void CPaintDoc::OnHeightLine()
 {
 	CExtensive dlg;
+	dlg.m_width = extensive;
 	
 	if (dlg.DoModal() == IDOK)
 	{
-		extensive = dlg.m_extensive;
+		extensive = dlg.m_width;
 	}
+}
+
+void CPaintDoc::DeleteContents()
+{
+	if (m_ListLine)
+		m_ListLine->RemoveAll();
+
+	CDocument::DeleteContents();
 }

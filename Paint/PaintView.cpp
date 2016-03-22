@@ -30,8 +30,9 @@ END_MESSAGE_MAP()
 
 // создание/уничтожение CPaintView
 
-CPaintView::CPaintView() : isPencil(TRUE)
+CPaintView::CPaintView() : isPencil(TRUE), isFirst(TRUE)
 {
+	
 }
 
 CPaintView::~CPaintView()
@@ -42,7 +43,7 @@ BOOL CPaintView::PreCreateWindow(CREATESTRUCT& cs)
 {
 	// TODO: изменить класс Window или стили посредством изменения
 	//  CREATESTRUCT cs
-
+	
 	return CView::PreCreateWindow(cs);
 }
 
@@ -55,19 +56,35 @@ void CPaintView::OnDraw(CDC* pDC)
 	if (!pDoc)
 		return;
 
+	if (isFirst == TRUE)
+	{
+		OnBrush();
+
+		isFirst = FALSE;
+	}
+
 	// Узнаём размеры окна
-	CRect rect = new CRect;
-	GetClientRect(rect);
+	CRect rect;
+	GetClientRect(&rect);
 
 	// Создаём новый контекст устройства
 	CDC p_newDC;
 	p_newDC.CreateCompatibleDC(pDC);
 
 	// Создаём изображение совместимое с данным контекстным устройством
+	CBitmap m_Bitmap;
 	m_Bitmap.CreateCompatibleBitmap(pDC, rect.Width(), rect.Height());
 
-	p_newDC.SelectObject(&m_Bitmap);
+	// Восстановление
+	CBitmap *oldBMP = p_newDC.SelectObject(&m_Bitmap);
 
+	//-------------------------------------------------------------------------
+	// Заливаем всё белым фоном
+	CBrush brush;
+	brush.CreateSolidBrush(RGB(255, 255, 255));
+	p_newDC.FillRect(rect, &brush);
+	//-------------------------------------------------------------------------
+	
 	auto *mList = GetDocument()->GetListLine();
 
 	auto current_position = mList->GetTailPosition();
@@ -91,7 +108,7 @@ void CPaintView::OnDraw(CDC* pDC)
 		CPen newPen(PS_SOLID, extensive, color);
 
 		// Установить новое перо текущим
-		p_newDC.SelectObject(&newPen);
+		CPen *oldPen = p_newDC.SelectObject(&newPen);
 
 		// Провести линию от предыдущей точки до текущей
 		p_newDC.MoveTo(mList->GetAt(current_position).x_begin,
@@ -99,10 +116,16 @@ void CPaintView::OnDraw(CDC* pDC)
 		p_newDC.LineTo(mList->GetAt(current_position).x_end,
 			mList->GetAt(current_position).y_end); // рисовать до текущей
 
+		p_newDC.SelectObject(oldPen);
+
 		mList->GetPrev(current_position);
 	}
 
-	DisplayBitmap(pDC, &m_Bitmap, 0, 0);
+	// Копирование битов
+	pDC->BitBlt(0, 0, rect.Width(), rect.Height(), &p_newDC, 0, 0, SRCCOPY);
+
+	// Восстановление контекста устройства
+	p_newDC.SelectObject(oldBMP);
 
 }
 
@@ -191,7 +214,7 @@ void CPaintView::OnMouseMove(UINT nFlags, CPoint point)
 			GetDocument()->GetListLine()->AddHead(tmp);
 		}
 
-		Invalidate();
+		Invalidate(FALSE);
 	}
 
 	CView::OnMouseMove(nFlags, point);

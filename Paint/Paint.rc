@@ -163,15 +163,15 @@ BEGIN
     DEFPUSHBUTTON   "ОК",IDOK,45,38,50,14,WS_GROUP
 END
 
-IDD_DIALOG_EXTENSIVE DIALOGEX 0, 0, 151, 79
+IDD_DIALOG_EXTENSIVE DIALOGEX 0, 0, 445, 184
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Ширина линии"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "ОК",IDOK,19,49,50,14
-    PUSHBUTTON      "Отмена",2,80,49,50,14
-    LTEXT           "Введите ширину линии в пикселях:",IDC_STATIC,17,14,121,8
-    EDITTEXT        IDC_EDIT_EXTENSIVE,18,30,119,14,ES_CENTER | ES_AUTOHSCROLL | ES_NUMBER
+    DEFPUSHBUTTON   "ОК",IDOK,41,102,149,45
+    PUSHBUTTON      "Отмена",2,226,102,179,45
+    CTEXT           "0 px",IDC_SHOW_PIXCEL,367,52,70,10
+    CONTROL         "",IDC_SLIDER_PIXEL,"msctls_trackbar32",TBS_AUTOTICKS | TBS_BOTH | TBS_ENABLESELRANGE | WS_TABSTOP,23,46,338,25
 END
 
 
@@ -233,9 +233,10 @@ BEGIN
     IDD_DIALOG_EXTENSIVE, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 144
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 72
+        RIGHTMARGIN, 438
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 177
+        HORZGUIDE, 124
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -269,6 +270,17 @@ END
 //
 
 IDR_TOOLBAR_MAIN        BITMAP                  "res\\toolbar.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_DIALOG_EXTENSIVE AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
 
 
 /////////////////////////////////////////////////////////////////////////////

@@ -90,4 +90,5 @@ protected:
 public:
 	afx_msg void OnColorLine();
 	afx_msg void OnHeightLine();
+	virtual void DeleteContents();
 };

@@ -1,4 +1,5 @@
 #pragma once
+#include "afxcmn.h"
 
 
 // диалоговое окно CExtensive
@@ -21,6 +22,11 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-	// Переенная ширины линии
-	int m_extensive;
+	// Размер линии
+	int m_width;
+	// Текст в ячейке
+	CString m_Text_Show;
+	afx_msg void OnNMCustomdrawSliderPixel(NMHDR *pNMHDR, LRESULT *pResult);
+	// Контроль за слайдером
+	CSliderCtrl m_Control_slider;
 };
